@@ -40,12 +40,6 @@ class AdminController extends Controller
         return view('admin.dashboard');
     }
 
-    public function logout()
-    {
-        Session::flush();
-        return redirect('/admin')->with('flash_message_success', 'Logged out successfully');
-    }
-
     public function settings()
     {
         return view('admin.settings');  
@@ -61,5 +55,31 @@ class AdminController extends Controller
         } else {
             echo "false"; die;
         }
+    }  
+
+    //  Check current password and if correct then update and return to settings page with success 
+    public function updatePassword(Request $request)
+    {
+       if($request->isMethod('post')){
+           $data = $request->all();
+        //    echo "<pre>"; 
+        //    print_r($data); 
+        //    die;
+        $check_password = User::where(['email' => Auth::user()->email])->first();
+        $current_password = $data['current_pwd'];
+        if(Hash::check($current_password, $check_password->password)){
+            $password = bcrypt($data['new_pwd']);
+            User::where('id','1')->update(['password'=>$password]);
+            return redirect('/admin/settings')->with('flash_message_success','Password updated successfully!');
+        }else {
+            return redirect('/admin/settings')->with('flash_message_error','Incorrect Password!');
+        }
+       }
+    }
+
+    public function logout()
+    {
+        Session::flush();
+        return redirect('/admin')->with('flash_message_success', 'Logged out successfully');
     }
 }

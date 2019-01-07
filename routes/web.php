@@ -13,16 +13,16 @@
 
 Route::match(['get', 'post'], '/admin', 'AdminController@login');
 
-
-
 Route::get('/logout','AdminController@logout');
 
 Auth::routes();
 
+//Admin middleware. Routes only accissible to logged in users
 Route::group(['middleware' => ['auth']], function(){
     Route::get('/admin/dashboard','AdminController@dashboard');
     Route::get('/admin/settings','AdminController@settings');
     Route::get('/admin/check-pwd', 'AdminController@checkPassword');
+    Route::match(['get', 'post'],'/admin/update-pwd','AdminController@updatePassword');
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
