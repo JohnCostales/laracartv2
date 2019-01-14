@@ -82,6 +82,101 @@ $(document).ready(function () {
         errorClass: "help-inline",
         errorElement: "span",
         highlight: function (element, errorClass, validClass) {
+            $(element).parents('.control-group').addClass('error');
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element).parents('.control-group').removeClass('error');
+            $(element).parents('.control-group').addClass('success');
+        }
+    });
+
+    //--- Category ---//
+    // Category Add Validation
+    $("#add_category").validate({
+        rules: {
+            category_name: {
+                required: true
+            },
+            description: {
+                required: true
+            },
+            url: {
+                required: true
+            }
+        },
+        errorClass: "help-inline",
+        errorElement: "span",
+        highlight: function (element, errorClass, validClass) {
+            $(element)
+                .parents(".control-group")
+                .addClass("error");
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element)
+                .parents(".control-group")
+                .removeClass("error");
+            $(element)
+                .parents(".control-group")
+                .addClass("success");
+        }
+    });
+
+    // Edit Category Validations
+    $("#edit_category").validate({
+        rules: {
+            category_name: {
+                required: true
+            },
+            description: {
+                required: true
+            },
+            url: {
+                required: true
+            }
+        },
+        errorClass: "help-inline",
+        errorElement: "span",
+        highlight: function (element, errorClass, validClass) {
+            $(element)
+                .parents(".control-group")
+                .addClass("error");
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element)
+                .parents(".control-group")
+                .removeClass("error");
+            $(element)
+                .parents(".control-group")
+                .addClass("success");
+        }
+    });
+
+    // Confirm Delete
+    $("#deleteCat").click(function () {
+        if (confirm('Are you sure you want to delete this category?')) {
+            return true;
+        }
+        return false;
+    });
+
+    $("#number_validate").validate({
+        rules: {
+            min: {
+                required: true,
+                min: 10
+            },
+            max: {
+                required: true,
+                max: 24
+            },
+            number: {
+                required: true,
+                number: true
+            }
+        },
+        errorClass: "help-inline",
+        errorElement: "span",
+        highlight: function (element, errorClass, validClass) {
             $(element)
                 .parents(".control-group")
                 .addClass("error");
@@ -131,4 +226,82 @@ $(document).ready(function () {
                 .addClass("success");
         }
     });
+
+    //--- Products --//
+    // Products Add Validation
+    $("#add_product").validate({
+        rules: {
+            category_id: {
+                required: true
+            },
+            product_name: {
+                required: true
+            },
+            product_code: {
+                required: true
+            },
+            description: {
+                required: true
+            },
+            price: {
+                required: true,
+                number: true
+            },
+            image: {
+                required: true
+            },
+        },
+        errorClass: "help-inline",
+        errorElement: "span",
+        highlight: function (element, errorClass, validClass) {
+            $(element)
+                .parents(".control-group")
+                .addClass("error");
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element)
+                .parents(".control-group")
+                .removeClass("error");
+            $(element)
+                .parents(".control-group")
+                .addClass("success");
+        }
+    });
+
+    $("#edit_product").validate({
+        rules: {
+            category_id: {
+                required: true
+            },
+            product_name: {
+                required: true
+            },
+            product_code: {
+                required: true
+            },
+            description: {
+                required: true
+            },
+            price: {
+                required: true,
+                number: true
+            },
+        },
+        errorClass: "help-inline",
+        errorElement: "span",
+        highlight: function (element, errorClass, validClass) {
+            $(element)
+                .parents(".control-group")
+                .addClass("error");
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element)
+                .parents(".control-group")
+                .removeClass("error");
+            $(element)
+                .parents(".control-group")
+                .addClass("success");
+        }
+    });
+
 });

@@ -23,6 +23,17 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/admin/settings','AdminController@settings');
     Route::get('/admin/check-pwd', 'AdminController@checkPassword');
     Route::match(['get', 'post'],'/admin/update-pwd','AdminController@updatePassword');
+
+    // Categories routes for Admins
+    Route::match(['get','post'],'/admin/add-category','CategoryController@addCategory');
+    Route::match(['get', 'post'], '/admin/edit-category/{id}', 'CategoryController@editCategory');
+    Route::match(['get', 'post'], '/admin/delete-category/{id}', 'CategoryController@deleteCategory');
+    Route::get('/admin/view-categories', 'CategoryController@viewCategories');
+
+    // Product routes for Admins
+    Route::match(['get','post'],'/admin/add-product','ProductsController@addProduct');
+    Route::match(['get', 'post'], '/admin/edit-product/{id}', 'ProductsController@editProduct');
+    Route::get('/admin/view-products', 'ProductsController@viewProducts');
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
