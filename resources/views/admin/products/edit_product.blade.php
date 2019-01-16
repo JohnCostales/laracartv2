@@ -42,6 +42,7 @@
                             <div class="control-group">
                                 <label class="control-label">Category</label>
                                 <div class="controls">
+                                    
                                     <select name="category_id" id="category_id">
                                         <?php echo $categories_dropdown; ?>
                                     </select>
