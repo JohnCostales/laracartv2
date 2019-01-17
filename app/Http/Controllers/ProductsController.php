@@ -72,19 +72,43 @@ class ProductsController extends Controller
         return view('admin.products.add_product')->with(compact('categories_dropdown'));
     }
 
-    public function editProduct(Request $request, $id=null){
+    public function editProduct(Request $request, $id){
         // echo "test"; die;
 
         if ($request->isMethod('post')) {
             $data = $request->all();
             // echo "<pre>"; print_r($data); die;
 
+            //Image Upload
+            if($request->hasFile('image')){
+                // echo $image_tmp = Input::file('image');
+                $image_tmp = Input::file('image');
+                if($image_tmp->isValid()){
+
+                    // Declare file paths
+                    $extension = $image_tmp->getClientOriginalExtension();
+                    $filename = rand(111,99999).'.'.$extension;
+                    $large_image_path = 'images/backend_images/products/large/'.$filename; // Path the images to folders
+                    $medium_image_path = 'images/backend_images/products/medium/'.$filename;
+                    $small_image_path = 'images/backend_images/products/small/'.$filename;
+
+                    // Resize images
+                    Image::make($image_tmp)->fit(1200,1200)->save($large_image_path); // Resize images -> save image
+                    Image::make($image_tmp)->fit(600,600)->save($medium_image_path);
+                    Image::make($image_tmp)->fit(300,300)->save($small_image_path);
+                }
+            }
+            else {
+                $filename = $data['current_image'];
+            }
+
             Product::where(['id'=>$id])->update([
                 'category_id'=>$data['category_id'],
                 'product_name'=>$data['product_name'],
                 'product_code'=>$data['product_code'],
                 'description'=>$data['description'],
-                'price'=>$data['price']
+                'price'=>$data['price'],
+                'image'=>$filename, 
                 ]);
 
             return redirect()->back()->with('flash_message_success', 'Product updated successfully' );
@@ -133,4 +157,19 @@ class ProductsController extends Controller
         }
         return view('admin.products.view_products')->with(compact('products'));
     }
+
+    public function deleteProduct($id){
+        echo "test";
+        Product::where(['id'=>$id])->delete();
+        return redirect()->back()->with('flash_message_success', 'Product has been deleted successfully'); 
+    }
+
+    // Pass id as paramaeter to write query to delete products
+    public function deleteProductImage($id){
+        Product::where(['id'=>$id])->update(['image'=>'']); // update image as an empty product
+        return redirect()->back()->with('flash_message_success', 'Product image has been deleted');
+        
+    }
+
+
 }

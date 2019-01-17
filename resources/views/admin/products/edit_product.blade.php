@@ -35,14 +35,14 @@
                     </div>
 
                     <div class="widget-content nopadding">
-                        <form enctype="multipart/form-data" class="form-horizontal" method="post" action="{{ url('/admin/edit-product/'.$productDetails->id) }}" name="edit_product"
-                            id="edit_product" novalidate="novalidate">
+                        <form enctype="multipart/form-data" class="form-horizontal" method="post" action="{{ url('/admin/edit-product/'.$productDetails->id) }}"
+                            name="edit_product" id="edit_product" novalidate="novalidate">
                             {{ csrf_field() }}
 
                             <div class="control-group">
                                 <label class="control-label">Category</label>
                                 <div class="controls">
-                                    
+
                                     <select name="category_id" id="category_id">
                                         <?php echo $categories_dropdown; ?>
                                     </select>
@@ -52,40 +52,46 @@
                             <div class="control-group">
                                 <label class="control-label">Product Name</label>
                                 <div class="controls">
-                                <input type="text" name="product_name" id="product_name" value="{{ $productDetails->product_name }}">
+                                    <input type="text" name="product_name" id="product_name" value="{{ $productDetails->product_name }}">
                                 </div>
                             </div>
-                            
+
                             <div class="control-group">
-                                    <label class="control-label">Product Code</label>
-                                    <div class="controls">
-                                        <input type="text" name="product_code" id="product_code" value="{{ $productDetails->product_code }}">
-                                    </div>
+                                <label class="control-label">Product Code</label>
+                                <div class="controls">
+                                    <input type="text" name="product_code" id="product_code" value="{{ $productDetails->product_code }}">
                                 </div>
+                            </div>
 
                             <div class="control-group">
                                 <label class="control-label">Description</label>
                                 <div class="controls">
-                                <textarea name="description" id="description">{{ $productDetails->description }}</textarea>
+                                    <textarea name="description" id="description">{{ $productDetails->description }}</textarea>
                                 </div>
                             </div>
 
                             <div class="control-group">
-                                    <label class="control-label">Price</label>
-                                    <div class="controls">
-                                        <input type="text" name="price" id="price" value="{{ $productDetails->price }}">
-                                    </div>
+                                <label class="control-label">Price</label>
+                                <div class="controls">
+                                    <input type="text" name="price" id="price" value="{{ $productDetails->price }}">
                                 </div>
+                            </div>
 
-                                <div class="control-group">
-                                    <label class="control-label">Image</label>
-                                    <div class="controls">
-                                        <input type="file" name="image" id="image" value="{{ $productDetails->image }}">
-                                    </div>
+                            <div class="control-group">
+                                <label class="control-label">Image</label>
+                                <div class="controls">
+                                    
+                                    @if(!empty($productDetails->image))
+                                    <img style="width: 100px" src="{{  asset('/images/backend_images/products/small/'.$productDetails->image) }}">
+                                    <a href="{{ url('/admin/delete-product-image/'.$productDetails->id) }}">Delete</a> |
+                                    @endif
+                                    <input type="file" name="image" id="image">
+                                    <input type="hidden" name="current_image" value="{{ $productDetails->image }}">
                                 </div>
+                            </div>
 
                             <div class="form-actions">
-                                <input type="submit" value="Edit Product" class="btn btn-success">
+                                <input type="submit" value="Confirm" class="btn btn-success">
                             </div>
                         </form>
                     </div>
