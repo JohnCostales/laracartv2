@@ -6,8 +6,8 @@
         <div id="breadcrumb">
             <a href="{{ url('admin/dashboard') }}" title="Go to Home" class="tip-bottom">
                 <i class="icon-home"></i> Home
-            </a>
-            <a href="{{ url('admin/view-products') }}">Products</a>
+            </a> >
+            <a href="{{ url('admin/view-products') }}">Products</a> >
             <a href="#" class="current">Edit Product</a>
         </div>
         <h1>Product</h1>

@@ -309,7 +309,7 @@ $(document).ready(function () {
     //     return false;
     // });
 
-    $(".deleteProduct").click(function () {
+    $(".deleteRecord").click(function () {
         // alert("test");
         var id = $(this).attr('rel');
         var deleteFunction = $deleteFunction = $(this).attr('rel1');

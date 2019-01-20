@@ -8,7 +8,7 @@
                 <i class="icon-home"></i> Home
             </a> >
             <a href="{{ url('admin/view-products') }}">Products</a> >
-            <a href="#" class="current">Add Product</a>
+            <a href="#" class="current">Add Attributes</a>
         </div>
         <h1>Product</h1>
         @if(Session::has('flash_message_error'))
@@ -31,22 +31,13 @@
                 <div class="widget-box">
 
                     <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
-                        <h5>Add Product</h5>
+                        <h5>Add Attributes</h5>
                     </div>
 
                     <div class="widget-content nopadding">
                         <form enctype="multipart/form-data" class="form-horizontal" method="post" action="{{ url('/admin/add-product') }}" name="add_product"
                             id="add_product" novalidate="novalidate">
                             {{ csrf_field() }}
-
-                            <div class="control-group">
-                                <label class="control-label">Category</label>
-                                <div class="controls">
-                                    <select name="category_id" id="category_id">
-                                        <?php echo $categories_dropdown; ?>
-                                    </select>
-                                </div>
-                            </div>
                             
                             <div class="control-group">
                                     <label class="control-label">Product Code</label>

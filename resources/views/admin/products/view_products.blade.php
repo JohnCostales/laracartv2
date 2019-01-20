@@ -50,31 +50,33 @@
                                     <td>{{ $product->id }}</td>
                                     <td>
                                         @if(!empty($product->image))
-                                        <img src="{{ asset('/images/backend_images/products/small/'.$product->image) }}" width="70px">
+                                        <img src="{{ asset('/images/backend_images/products/small/'.$product->image) }}"
+                                            width="70px">
                                         @endif
                                     </td>
                                     <td>{{ $product->product_name }}</td>
                                     <td>{{ $product->category_name }}</td>
                                     <td>{{ $product->product_code }}</td>
                                     <td>{{ $product->price }}</td>
-                                    <td class="center"> 
+                                    <td class="center">
                                         <a href="#myModal{{ $product->id }}" data-toggle="modal" class="btn btn-success btn-mini">View</a>
                                         <a href="{{ url('admin/edit-product/'.$product->id) }}" class="btn btn-primary btn-mini">Edit</a>
-                                    <a rel="{{ $product->id }}" rel1="delete-product" href="javascript:" href="javascript:" class="btn btn-danger btn-mini deleteProduct">Delete</a>
-                                    {{-- <a id="deleteProduct" href="{{ url('admin/delete-product/'.$product->id) }}" href="javascript:" class="btn btn-danger btn-mini">Delete</a> --}}
+                                        <a rel="{{ $product->id }}" rel1="delete-product" href="javascript:" class="btn btn-danger btn-mini deleteRecord">Delete</a>
+                                        {{-- <a id="deleteProduct" href="{{ url('admin/delete-product/'.$product->id) }}"
+                                            href="javascript:" class="btn btn-danger btn-mini">Delete</a> --}}
                                     </td>
                                 </tr>
                                 <div id="myModal{{ $product->id }}" class="modal hide">
                                     <div class="modal-header">
-                                    <button data-dismiss="modal" class="close" type="button">×</button>
-                                    <h3>{{ $product->product_name }} Details</h3>
+                                        <button data-dismiss="modal" class="close" type="button">×</button>
+                                        <h3>{{ $product->product_name }} Details</h3>
                                     </div>
                                     <div class="modal-body">
-                                    <p>ID: {{ $product->id  }}</p>
-                                    <p>Category: {{ $product->category_name }}</p>
-                                    <p>Description: {{ $product->description }}</p>
-                                    <p>Code: {{ $product->product_code }}</p>
-                                    <p>Price: €{{ $product->price }}</p>
+                                        <p>ID: {{ $product->id }}</p>
+                                        <p>Category: {{ $product->category_name }}</p>
+                                        <p>Description: {{ $product->description }}</p>
+                                        <p>Code: {{ $product->product_code }}</p>
+                                        <p>Price: €{{ $product->price }}</p>
                                     </div>
                                 </div>
                                 @endforeach

@@ -10,6 +10,7 @@ use Auth;
 use Session;
 use App\Category;
 use App\Product;
+use App\ProductsAttribute;
 
 class ProductsController extends Controller
 {
@@ -52,6 +53,9 @@ class ProductsController extends Controller
                     // Store image name in products table
                     $product->image = $filename;
                 }
+            }
+            else {
+                $product->image = '';
             }
 
             $product->save();
@@ -171,5 +175,11 @@ class ProductsController extends Controller
         
     }
 
-
+    // Product attribues
+    public function addAttributes(Request $request, $id)
+    {
+        // echo "test"; die;
+        return view('admin.products.add_attributes');
+        
+    }
 }
