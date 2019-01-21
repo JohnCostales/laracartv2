@@ -11,11 +11,13 @@
 |
 */
 
+Route::get('/', 'IndexController@index');
+
 Route::match(['get', 'post'], '/admin', 'AdminController@login');
 
-Route::get('/logout','AdminController@logout');
-
 Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
 
 //Admin middleware. Routes only accissible to logged in users
 Route::group(['middleware' => ['auth']], function(){
@@ -41,5 +43,3 @@ Route::group(['middleware' => ['auth']], function(){
     Route::match(['get', 'post'], 'admin/add-attributes/{id}', 'ProductsController@addAttributes');
     Route::get('/admin/delete-attribute/{id}', 'ProductsController@deleteAttribute');
 });
-
-Route::get('/home', 'HomeController@index')->name('home');
