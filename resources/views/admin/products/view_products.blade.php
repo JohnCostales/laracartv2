@@ -59,8 +59,9 @@
                                     <td>{{ $product->product_code }}</td>
                                     <td>{{ $product->price }}</td>
                                     <td class="center">
-                                        <a href="#myModal{{ $product->id }}" data-toggle="modal" class="btn btn-success btn-mini">View</a>
+                                        <a href="#myModal{{ $product->id }}" data-toggle="modal" class="btn btn-info btn-mini">View</a>
                                         <a href="{{ url('admin/edit-product/'.$product->id) }}" class="btn btn-primary btn-mini">Edit</a>
+                                        <a href="{{ url('admin/add-attributes/'.$product->id) }}" class="btn btn-success btn-mini">Add</a>
                                         <a rel="{{ $product->id }}" rel1="delete-product" href="javascript:" class="btn btn-danger btn-mini deleteRecord">Delete</a>
                                         {{-- <a id="deleteProduct" href="{{ url('admin/delete-product/'.$product->id) }}"
                                             href="javascript:" class="btn btn-danger btn-mini">Delete</a> --}}

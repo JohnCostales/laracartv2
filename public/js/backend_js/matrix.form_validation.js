@@ -334,4 +334,30 @@ $(document).ready(function () {
             });
     });
 
+
+    // Add Remove input fields dynamically https://www.codexworld.com/add-remove-input-fields-dynamically-using-jquery/
+    $(document).ready(function () {
+        var maxField = 10; //Input fields increment limitation
+        var addButton = $('.add_button'); //Add button selector
+        var wrapper = $('.field_wrapper'); //Input field wrapper
+        var fieldHTML = '<div><input type="text" name="sku[]" id="size" placeholder="Enter SKU.." style="width:120px"/> | <input type="text" name="size[]" id="size" placeholder="Enter size.." style="width:120px"/> | <input type="text" name="price[]" id="price" placeholder="Enter price.." style="width:120px"/> | <input type="text" name="stock[]" id="stock" placeholder="Enter stock.." style="width:120px"/><a href="javascript:void(0);" class="remove_button"> ×</a></div>'; //New input field html 
+        var x = 1; //Initial field counter is 1
+
+        //Once add button is clicked
+        $(addButton).click(function () {
+            //Check maximum number of input fields
+            if (x < maxField) {
+                x++; //Increment field counter
+                $(wrapper).append(fieldHTML); //Add field html
+            }
+        });
+
+        //Once remove button is clicked
+        $(wrapper).on('click', '.remove_button', function (e) {
+            e.preventDefault();
+            $(this).parent('div').remove(); //Remove field html
+            x--; //Decrement field counter
+        });
+    });
+
 });

@@ -163,7 +163,7 @@ class ProductsController extends Controller
     }
 
     public function deleteProduct($id){
-        echo "test";
+        // echo "test";
         Product::where(['id'=>$id])->delete();
         return redirect()->back()->with('flash_message_success', 'Product has been deleted successfully'); 
     }
@@ -176,10 +176,36 @@ class ProductsController extends Controller
     }
 
     // Product attribues
-    public function addAttributes(Request $request, $id)
+    public function addAttributes(Request $request, $id=null)
     {
         // echo "test"; die;
-        return view('admin.products.add_attributes');
+        $productDetails = Product::with('attributes')->where(['id'=>$id])->first();
+        // $productDetails = json_decode(json_encode($productDetails));
+        // echo "<pre>"; print_r($productDetails); die;
         
+        if($request->isMethod('post')){
+            $data = $request->all();
+            // echo "<pre>"; print_r($data); die;
+
+            foreach($data['sku'] as $key => $val){
+                if(!empty($val)){
+                    $attribute = new ProductsAttribute;
+                    $attribute->product_id = $id; 
+                    $attribute->sku = $val;
+                    $attribute->size = $data['size'][$key];
+                    $attribute->price = $data['price'][$key];
+                    $attribute->stock = $data['stock'][$key];
+                    $attribute->save();
+                }
+            }
+            return redirect('admin/add-attributes/'.$id)->with('flash_message_success','Product details added');
+        }
+        return view('admin.products.add_attributes')->with(compact('productDetails'));
+        
+    }
+
+    public function deleteAttribute($id){
+        ProductsAttribute::where(['id'=>$id])->delete();
+        return redirect()->back()->with('flash_message_success', 'Attribute has been deleted successfully'); 
     }
 }
