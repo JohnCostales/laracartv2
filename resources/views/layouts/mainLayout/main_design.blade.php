@@ -3,6 +3,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Home | E-Shopper</title>
@@ -12,7 +16,8 @@
     <link href="{{ asset('css/frontend_css/price-range.css') }}" rel="stylesheet">
     <link href="{{ asset('css/frontend_css/animate.css') }}" rel="stylesheet">
 	<link href="{{ asset('css/frontend_css/main.css') }}" rel="stylesheet">
-	<link href="{{ asset('css/frontend_css/responsive.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/frontend_css/responsive.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
@@ -26,12 +31,10 @@
 
 <body>
     
-    @include('layouts.mainLayout.main_header')
 
     @yield('content')
 	
-	@include('layouts/mainLayout.main_footer')
-  
+    <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/frontend_js/jquery.js') }}"></script>
 	<script src="{{ asset('js/frontend_js/bootstrap.min.js') }}"></script>
 	<script src="{{ asset('js/frontend_js/jquery.scrollUp.min.js') }}"></script>

@@ -13,6 +13,9 @@ class IndexController extends Controller
         // Ascending order by id (default)
         $productsAll = Product::get(); 
 
+        // $productsAll = json_decode(json_encode($productsAll));
+        // echo "<pre>"; print_r($productsAll); die;
+
         // Descending by id
         // $productsAll = Product::orderBy('id', 'DESC')->get(); 
         
@@ -25,7 +28,6 @@ class IndexController extends Controller
         // $categories = json_decode(json_encode($categories));
         // echo "<pre>"; print_r($categories); die;
 
-        /*
         $categories_menu = "";
         foreach($categories as $cat){
             // echo $cat->name; echo "<br>";
@@ -54,7 +56,7 @@ class IndexController extends Controller
             </div>";
             
         }
-        */
+        
         return view('index')->with(compact('productsAll', 'categories'));
     }
 }

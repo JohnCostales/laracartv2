@@ -11,13 +11,17 @@
 |
 */
 
-Route::get('/', 'IndexController@index');
+// Route::get('/', 'IndexController@index');
 
 Route::match(['get', 'post'], '/admin', 'AdminController@login');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
+
+//Change default view to a wildcard path
+Route::view('/{path?}', 'index');
+// Route::get('/', 'api\IndexController@index');
 
 //Admin middleware. Routes only accissible to logged in users
 Route::group(['middleware' => ['auth']], function(){
