@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, NavLink, BrowserRouter, Switch } from "react-router-dom";
-import Home from "./Home";
+import Products from "./products/Products";
 class Header extends React.Component {
     render() {
         return (
@@ -78,7 +78,7 @@ class Header extends React.Component {
                                             <Route
                                                 exact
                                                 path="/"
-                                                component={Home}
+                                                component={Products}
                                             />
                                         </Switch>
                                     </div>

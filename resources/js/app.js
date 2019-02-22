@@ -6,6 +6,13 @@
 
 require("./bootstrap");
 
+require("./frontend_js/jquery.js");
+require("./frontend_js/bootstrap.min.js");
+require("./frontend_js/jquery.scrollUp.min.js");
+require("./frontend_js/price-range.js");
+// require("./frontend_js/jquery.prettyPhoto.js");
+require("./frontend_js/main.js");
+
 /**
  * Next, we will create a fresh React component instance and attach it to
  * the page. Then, you may begin adding components to this application
