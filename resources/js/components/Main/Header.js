@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, NavLink, BrowserRouter, Switch } from "react-router-dom";
-import Products from "./products/Products";
+import Products from "../products/Products";
 class Header extends React.Component {
     render() {
         return (

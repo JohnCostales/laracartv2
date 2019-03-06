@@ -1,17 +1,21 @@
 import React, { Component } from "react";
+
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import ReactDOM from "react-dom";
-import Header from "./Header";
+import Home from "./Main/Home";
 
 class Index extends React.Component {
     render() {
         return (
-            <div>
-                <Header />
-            </div>
+            <Router>
+                <Switch>
+                    {/* Routes */}
+                    <Route exact path="/" component={Home} />
+                    <Route exact path="/callback" component={Home} />
+                </Switch>
+            </Router>
         );
     }
 }
 
-if (document.getElementById("index")) {
-    ReactDOM.render(<Index />, document.getElementById("index"));
-}
+export default Index;
