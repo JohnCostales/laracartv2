@@ -29,4 +29,18 @@ class IndexController extends Controller
         return $productsAll->toJson();
         Response::json(array('products'=>$productsAll,'categories'=>$categories));
     }
+
+    public function showCategories()
+    {
+        $categories = Category::get();
+        
+        return $categories->toJson();
+    }
+
+    public function showProductsByCategory($id)
+    {
+        $products = Product::where(['category_id'=>$id])->get();
+        
+        return $products->toJson();
+    }
 }

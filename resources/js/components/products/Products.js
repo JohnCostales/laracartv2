@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 // import '.css/frontend_css/bootstrap.min.css';
 
@@ -7,6 +8,7 @@ class Home extends Component {
         super();
         this.state = {
             products: []
+            
         };
     }
 
@@ -28,6 +30,7 @@ class Home extends Component {
                             <div className="col-sm-3">
                                 <div className="left-sidebar">
                                     <h2>Category</h2>
+                                    <Link to='productByCategory/6'>Pencil</Link>
                                 </div>
                             </div>
 
@@ -39,7 +42,7 @@ class Home extends Component {
                                     </h2>
                                     {products.map(product => {
                                         return (
-                                            <div className="col-sm-4">
+                                            <div key={product.id} className="col-sm-4">
                                                 <div className="product-image-wrapper">
                                                     <div className="single-products">
                                                         <div className="productinfo text-center">

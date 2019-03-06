@@ -20,4 +20,9 @@ Auth::routes();
 // Route::get('/home', 'HomeController@index')->name('home');
 
 //Change default view to a wildcard path
-Route::view('/{path?}', 'index');
+// Route::view('/{path?}', 'index');
+
+Route::get( '/{path?}', function(){
+    return view( 'index');
+})->where('path', '.*');
+

@@ -18,3 +18,5 @@ use Illuminate\Http\Request;
 // });
 
 Route::get('index', 'api\IndexController@index');
+Route::get('categories', 'api\IndexController@showCategories');
+Route::get('product/category/{id}', 'api\IndexController@showProductsByCategory');

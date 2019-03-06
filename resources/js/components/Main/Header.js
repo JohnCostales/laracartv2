@@ -1,10 +1,11 @@
 import React from "react";
 import { Route, NavLink, BrowserRouter, Switch } from "react-router-dom";
 import Products from "../products/Products";
+
 class Header extends React.Component {
     render() {
         return (
-            <BrowserRouter>
+            <div>
                 <header id="header">
                     <div className="header_top">
                         <div className="container">
@@ -25,7 +26,7 @@ class Header extends React.Component {
                             </div>
                         </div>
                     </div>
-                    >
+                    
                     <div className="header-middle">
                         <div className="container">
                             <div className="row">
@@ -67,20 +68,10 @@ class Header extends React.Component {
                                         </button>
                                     </div>
                                     <div className="mainmenu pull-left">
-                                        <ul className="nav navbar-nav collapse navbar-collapse">
-                                            <li>
-                                                <NavLink exact to="/">
-                                                    Home
-                                                </NavLink>
-                                            </li>
-                                        </ul>
-                                        <Switch>
-                                            <Route
-                                                exact
-                                                path="/"
-                                                component={Products}
-                                            />
-                                        </Switch>
+                                        
+                                       
+                                        <Products />
+                                           
                                     </div>
                                 </div>
                                 <div className="col-sm-3">
@@ -95,7 +86,7 @@ class Header extends React.Component {
                         </div>
                     </div>
                 </header>
-            </BrowserRouter>
+            </div>
         );
     }
 }
