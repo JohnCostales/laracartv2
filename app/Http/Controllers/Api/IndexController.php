@@ -13,7 +13,7 @@ class IndexController extends Controller
     {
         // Ascending order by id (default)
         $productsAll = Product::get(); 
-
+        // $productsAll = Product::get()->toArray(); 
         // Descending by id
         // $productsAll = Product::orderBy('id', 'DESC')->get(); 
         
@@ -21,21 +21,28 @@ class IndexController extends Controller
         //$productsAll = Product::inRandomOrder()->get();
 
         // Display all Categories
-        $categories = Category::with('categories')->where(['parent_id'=>0])->get();
-        // $categories = Category::where(['parent_id'=>0])->get();
+        
+        $categories = Category::where(['parent_id'=>0])->get();
         // $categories = json_decode(json_encode($categories));
         // echo "<pre>"; print_r($categories); die;
         
-        return $productsAll->toJson();
-        Response::json(array('products'=>$productsAll,'categories'=>$categories));
+        $response = array(
+            'products' => $productsAll,
+            'categories' => $categories
+        );
+
+        // Return array as JSON response
+        return response()->json($response);
+        // Response::json(array('products'=>$productsAll,'categories'=>$categories));
+        // Response::json(array('products'=>$productsAll));
     }
 
-    public function showCategories()
-    {
-        $categories = Category::get();
-        
-        return $categories->toJson();
-    }
+    // public function showCategories()
+    // {
+    //     // $categories = Category::get();
+    //     $categories = Category::with('categories')->where(['parent_id'=>0])->get();
+    //     return $categories->toJson();
+    // }
 
     public function showProductsByCategory($id)
     {

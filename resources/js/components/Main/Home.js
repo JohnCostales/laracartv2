@@ -1,16 +1,15 @@
 import React, { Component } from "react";
 
 import Header from "../Main/Header";
+import Products from "../products/Products";
 
-class Home extends React.Component {
+class Home extends Component {
     render() {
         return (
-            <section>
-                <div className="container">
-                    <Header />
-                </div>
-            </section>
-            
+            <div>
+                {/* <Header /> */}
+                <Products />
+            </div>
         );
     }
 }

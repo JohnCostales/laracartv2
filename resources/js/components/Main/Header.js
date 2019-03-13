@@ -1,9 +1,24 @@
-import React from "react";
-import { Route, NavLink, BrowserRouter, Switch } from "react-router-dom";
-import Products from "../products/Products";
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
-class Header extends React.Component {
+class Header extends Component {
+    constructor() {
+        super();
+        this.state = {
+            categories: []
+        };
+    }
+
+    componentDidMount() {
+        //Get a number of products from the API and store their information in state
+        axios.get("api/categories").then(response => {
+            this.setState({ categories: response.data });
+        });
+    }
+
     render() {
+        const { categories } = this.state;
+
         return (
             <div>
                 <header id="header">
@@ -26,7 +41,7 @@ class Header extends React.Component {
                             </div>
                         </div>
                     </div>
-                    
+
                     <div className="header-middle">
                         <div className="container">
                             <div className="row">
@@ -68,19 +83,23 @@ class Header extends React.Component {
                                         </button>
                                     </div>
                                     <div className="mainmenu pull-left">
-                                        
-                                       
-                                        <Products />
-                                           
+                                        <ul className="nav navbar-nav collapse navbar-collapse">
+                                            <li><a href="" className="active">Home</a></li>
+                                            <li className="dropdown"><a href="#">Shop<i className=""></i></a>
+                                                <ul role="menu" className="sub-menu">
+                                                    {categories.map(category => {
+                                                        return (
+                                                            <div key={category.id}>
+                                                                <li><Link to={`/products/${category.url}`}>{category.name}</Link></li>
+                                                            </div>
+                                                        )
+                                                    })}
+                                                </ul>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                                 <div className="col-sm-3">
-                                    <div className="search_box pull-right">
-                                        <input
-                                            type="text"
-                                            placeholder="Search"
-                                        />
-                                    </div>
                                 </div>
                             </div>
                         </div>
