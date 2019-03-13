@@ -8,14 +8,16 @@ class Products extends Component {
         super();
         this.state = {
             products: []
-
         };
     }
 
     componentDidMount() {
         //Get a number of products from the API and store their information in state
-        axios.get("api/index").then(response => {
-            this.setState({ products: response.data });
+        axios.get("api/products/").then(response => {
+            // console.log(response.data)
+            this.setState({ 
+                products: response.data.products
+            });
         });
     }
 
@@ -23,11 +25,12 @@ class Products extends Component {
         const { products } = this.state;
 
         return (
+            <div>
             <section>
                 <div className="container">
                     <div className="row">
                         <div className="col-sm-3">
-                            {/* <SideBar /> */}
+                            <SideBar />
                         </div>
 
                         <div className="col-sm-9 padding-right">
@@ -56,6 +59,7 @@ class Products extends Component {
                                                         <p />
                                                         <Link
                                                             to={`/product/${product.id}`}
+                                                            key={product.id}
                                                             className="btn btn-default add-to-cart"
                                                         >
                                                             <i className="fa fa-shopping-cart" />
@@ -72,6 +76,7 @@ class Products extends Component {
                     </div>
                 </div>
             </section>
+            </div>
         );
     }
 }

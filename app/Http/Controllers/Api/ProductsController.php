@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\api;
+namespace App\Http\Controllers\Api;
 
 //-- HEADERS --//
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 // Extensions
 use Image;
@@ -56,7 +57,14 @@ class ProductsController extends Controller
         }
         // echo $category->id; die;
         
-        Response::json(array('productsAll'=>$productsAll,'categories'=>$categories, 'categoryList'=>$categoryList));
+        // Return
+        $data = array(
+            'categories' => $categories,
+            'categoryList' => $categoryList,
+            'productsAll' => $productsAll,
+        );
+
+        return response()->json($data);
         // return view('products.list')->with(compact('categories','categoryList', 'productsAll'));
     }
 
@@ -73,7 +81,15 @@ class ProductsController extends Controller
         $totalStock = ProductsAttribute::where('product_id', $id)->sum('stock');
         // echo $totalStock; die;
 
-        return view('products.detail')->with(compact('productDetails', 'categories', 'totalStock'));
+        // Return
+        // return view('products.detail')->with(compact('productDetails', 'categories', 'totalStock'));
+        $data = array(
+            'productDetails' => $productDetails,
+            'categories' => $categories,
+            'totalStock' => $totalStock,
+        );
+
+        return response()->json($data);
     }
 
     // Get product attribute price by product id

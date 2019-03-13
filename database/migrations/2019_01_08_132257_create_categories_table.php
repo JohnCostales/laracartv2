@@ -20,8 +20,7 @@ class CreateCategoriesTable extends Migration
             $table->text('description');
             $table->string('url');
             $table->text('status');
-            
-            
+                        
             $table->timestamps();
         });
     }

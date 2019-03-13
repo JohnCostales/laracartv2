@@ -9,16 +9,15 @@ class Header extends Component {
         };
     }
 
-    componentDidMount() {
+    componentWillMount() {
         //Get a number of products from the API and store their information in state
-        axios.get("api/categories").then(response => {
-            this.setState({ categories: response.data });
+        axios.get("api/products").then(response => {
+            this.setState({ categories: response.data.categories });
         });
     }
 
     render() {
         const { categories } = this.state;
-
         return (
             <div>
                 <header id="header">
@@ -84,7 +83,7 @@ class Header extends Component {
                                     </div>
                                     <div className="mainmenu pull-left">
                                         <ul className="nav navbar-nav collapse navbar-collapse">
-                                            <li><a href="" className="active">Home</a></li>
+                                            <li><Link to={`/`} className="active">Home</Link></li>
                                             <li className="dropdown"><a href="#">Shop<i className=""></i></a>
                                                 <ul role="menu" className="sub-menu">
                                                     {categories.map(category => {

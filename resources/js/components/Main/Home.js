@@ -1,3 +1,4 @@
+3
 import React, { Component } from "react";
 
 import Header from "../Main/Header";
@@ -7,7 +8,6 @@ class Home extends Component {
     render() {
         return (
             <div>
-                {/* <Header /> */}
                 <Products />
             </div>
         );
