@@ -9,6 +9,7 @@ class ProductsByCategory extends Component {
         super(props);
         this.state = {
             productsAll: [],
+            categories: [],
         };
     }
 
@@ -16,7 +17,7 @@ class ProductsByCategory extends Component {
         const categoryUrl = this.props.match.params.url
         //Get a number of products from the API and store their information in state
         axios.get(`/api/products/${categoryUrl}`).then(response => {
-            // console.log(response.data);
+            // console.log(response.data.productsAll);
             this.setState({ 
                 productsAll: response.data.productsAll });
         });

@@ -1,129 +1,127 @@
 import React, { Component } from "react";
 import axios from "axios";
-import Header from "../Main/Header";
 import SideBar from "../Main/SideBar";
 
 class Detail extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            product: [],
+            // Product Attributes
+            productDetails: {},
             categories: [],
-            stock: [],
+            totalStock: {},
+            
+            // Input values into cart
+            size: '',
+            price: '',
+            quantity: '',
         };
+
+        this.handleFieldChange = this.handleFieldChange.bind(this)
+        this.handleAddToCart = this.handleAddToCart.bind(this)
+        this.hasErrorFor = this.hasErrorFor.bind(this)
+        this.renderErrorFor = this.renderErrorFor.bind(this)
+    }
+
+    handleFieldChange (event) {
+        this.setState({
+            size: event.target.value,
+            price: event.target.value,
+            quantity:event.taget.value,
+        })
+    }
+
+    handleAddToCart (event) {
+        event.preventDefault()
+
+        const prod = {
+            product_id: this.state.productDetails.id,
+            product_name: this.state.productDetails.name,
+            product_code: this.state.productDetails.code,
+            size: this.state.size,
+            price: this.state.size,
+            quantity: this.state.quantity,
+
+        }
+
+        // make post request
+        axios.post("/api/add-cart", prod)
+        .then(response => {
+                console.log('Saved to Cart');
+            }
+        )
+    }
+
+    hasErrorFor (field) {
+    return !!this.state.errors[field]
+    }
+
+    renderErrorFor (field) {
+        if (this.hasErrorFor(field)) {
+            return (
+            <span className='invalid-feedback'>
+                <strong>{this.state.errors[field][0]}</strong>
+            </span>
+            )
+        }
     }
 
     componentDidMount() {
+        const productId = this.props.match.params.id
         //Get a number of products from the API and store their information in state
-        axios.get("api/products/${id}").then(response => {
-            // console.log(response.data)
+        axios.get(`/api/product/${productId}`).then(response => {
+            // console.log(response.data.productDetails)
             this.setState({ 
-                product: response.data.productDetails,
-                categories: response.data.categories,
-                stock: response.data.stock,
+                productDetails: response.data.productDetails,
+                totalStock: response.data.totalStock
             });
         });
     }
 
     render() {
-        const { products } = this.state;
-
+        const { productDetails, totalStock } = this.state;
         return (
             <div>
                 <section>
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-3">
-                {/* <SideBar/> */}
-            </div>
-
-            <div class="col-sm-9 padding-right">
-                <div class="product-details">
-                    {/* <!--product-details--> */}
-                    <div class="col-sm-5">
-                        <div class="view-product">
-                            <img src="" alt="" />
+                    <div className="container">
+                        <div className="col-sm-3">
+                            {/* <SideBar /> */}
                         </div>
-                    </div>
-                    <div class="col-sm-7">
-                        <form name="addToCart" id="addToCart" action="" method="post">
-                            {{ csrf_field() }}
-                            <!-- Hidden inputs to pass through the form and add to cart -->
-                            <input type="hidden" name="product_id" value="{{ $productDetails->id }}">
-                            <input type="hidden" name="product_name" value="{{ $productDetails->product_name }}">
-                            <input type="hidden" name="product_code" value="{{ $productDetails->product_code }}">
-                            <input type="hidden" name="size" value="{{ $productDetails->size }}">
-                            <input type="hidden" name="price" id="price" value="{{ $productDetails->price }}">
-                            <div class="product-information">
-                                <!--/product-information-->
-                                <img src="" class="newarrival" alt="" />
-                                <h2>{{ $productDetails->product_name }}</h2>
-                                <p>Code: {{ $productDetails->product_code }}</p>
-                                <p>
-                                    <!-- Show each sizes available -->
-                                    <select id="selSize" name="size">
-                                        <option value="">Length x Height in centimeters</option>
-                                        @foreach($productDetails->attributes as $sizes)
-                                        <option value="{{ $productDetails->id }}-{{ $sizes->size }}">{{ $sizes-> size
-                                            }}</option>
-                                        @endforeach
-                                    </select>
-                                </p>
-                                <span>
-                                    <span id="getPrice">EUR €{{ $productDetails->price }}</span>
-                                    <label>Quantity:</label>
-                                    <!-- Check the quantity in stock -->
-                                    @if($totalStock > 0)
-                                    <input type="text" name="quantity" value="{{ $totalStock }}">
-                                    <button type="submit" class="btn btn-fefault cart">
-                                        <i class="fa fa-shopping-cart"></i>
-                                        Add to cart
-                                    </button>
-                                    @else
-                                    <input type="text" value="{{ $totalStock }}" disabled>
-                                    @endif
-
-                                </span>
-                                <p><b>Availability:</b>
-                                    <span id="stockCount">
-                                        @if($totalStock > 0)
-                                        In Stock
-                                        @else
-                                        Out of Stock
-                                        @endif
-                                    </span>
-                                </p>
-                                <p><b>Condition:</b> New</p>
-                            </div>
-                            <!--/product-information-->
-                        </form>
-                    </div>
-                </div>
-                <!--/product-details-->
-                <div class="category-tab shop-details-tab">
-                    <!--category-tab-->
-                    <div class="col-sm-12">
-                        <ul class="nav nav-tabs">
-                            <li class="active"><a href="#description" data-toggle="tab">Description</a></li>
-                            <li><a href="#shipping" data-toggle="tab">Shipping</a></li>
-                        </ul>
-                    </div>
-                    <div class="tab-content">
-                        <div class="tab-pane fade active in" id="description">
-                            <div class="col-sm-12">
-                                <p>{{ $productDetails->description }}</p>
+                        <div className="col-sm-9 padding-right">
+                            <div className="product-details">
+                                <div className="col-sm-5">
+                                    <div className="view-product">
+                                        <img src={`images/backend_images/products/small/${productDetails.image}`} alt=""/>                                        
+                                    </div>
+                                </div>
+                                <div className="col-sm-7">
+                                    <form name="addToCart" id="addToCart" onSubmit={this.handleAddToCart} method="post">
+                                        <div className="product-information">
+                                            <h2>{productDetails.product_name}</h2>
+                                            <p>Code: {productDetails.product_code}</p>
+                                            <p>
+                                                <select id="selSize" name="size">
+                                                    <option value="">Length x Height in centimeters</option>
+                                                </select>
+                                            </p>
+                                            <span>
+                                                <span id="getPrice">EUR €{productDetails.price}</span>
+                                                <label>Quantity:</label>
+                                                <input type="text"
+                                                    name="quantity" value={totalStock}
+                                                    onChange={this.handleFieldChange}/>
+                                                <button type="submit" className="btn btn-fefault cart">
+                                                    <i className="fa fa-shopping-cart"></i>
+                                                    Add to cart
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-
-                        <div class="tab-pane fade" id="shipping">
-                        </div>
-
                     </div>
-
-                </div>
-            </div>
-
-</section>
+                </section>
             </div>
         );
     }

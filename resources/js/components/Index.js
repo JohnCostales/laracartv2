@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import ReactDOM from "react-dom";
 import Home from "./Main/Home";
 import Header from "./Main/Header";
@@ -12,11 +12,12 @@ class Index extends Component {
         return (
             <Router>
                 <div>
-                    <Header />
                     {/* Routes */}
+                    <Switch>
                     <Route exact path="/" component={Home} />
                     <Route exact path="/products/:url" exact component={ProductByCategory} />
                     <Route exact path="/product/:id" component={Detail} />
+                    </Switch>
                 </div>
             </Router>
         );

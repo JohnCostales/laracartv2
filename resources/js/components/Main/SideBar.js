@@ -9,7 +9,7 @@ class SideBar extends Component {
         };
     }
 
-    componentWillMount() {
+    componentDidMount() {
         //Get a number of products from the API and store their information in state
         axios.get("api/products").then(response => {
             // console.log(response.data);

@@ -46,9 +46,7 @@ class Products extends Component {
                                                 <div className="single-products">
                                                     <div className="productinfo text-center">
                                                         <img
-                                                            src={`images/backend_images/products/small/${
-                                                                product.image
-                                                                }`}
+                                                            src={`images/backend_images/products/small/${product.image}`}
                                                             alt=""
                                                         />
                                                         <h2>
@@ -57,14 +55,9 @@ class Products extends Component {
                                                             }
                                                         </h2>
                                                         <p />
-                                                        <Link
-                                                            to={`/product/${product.id}`}
-                                                            key={product.id}
-                                                            className="btn btn-default add-to-cart"
-                                                        >
-                                                            <i className="fa fa-shopping-cart" />
+                                                        <Link to={`/product/${product.id}`} key={product.id}>
                                                             View Product
-                                                            </Link>
+                                                        </Link>
                                                     </div>
                                                 </div>
                                             </div>
